@@ -4,20 +4,22 @@ require_relative 'lib/board'
 require 'pry'
 
 class Chess
-  
+  attr_accessor :current_color
   attr_reader :player1, :player2, :board
   
   def initialize
     @board = Board.new
     @player1 = Player.new
     @player2 = Player.new
+    @current_color = 'white'
   end
 
   def play
     game_settings
 
     loop do
-      player_moves
+      game_round
+      break if false # if someone won
     end
   end
   
@@ -25,39 +27,49 @@ class Chess
 
   ########################################
   ############### Gameplay ###############
+  def game_round
+    @board.display
+    player_moves
+  end
+
   def player_moves
-    display_board
+    puts "#{current_color}'s turn'"
+    puts "Choose piece"
+    chosen_move = gets.chomp
+
+    puts "Choose square"
+    chosen_square = gets.chomp
+    
+    @current_color = @current_color == 'white' ? 'black' : 'white'
   end
   
   ########################################
   ################ Board #################
-  def display_board
-    gets = "hey"
-  end
   
+  # ..........
+
   ########################################
   ############ Game settings #############
   def game_settings
-    choose_name(1)
-    choose_name(2)
+    @player1.choose_name
+    @player2.choose_name
     choose_color # computer chooses atm
-  end
-
-  def choose_name(player_num)
-    puts "Player #{player_num} please enter your name"
-    n = nil
-    loop do
-      n = gets.strip
-      break unless n.empty? && n.lengt < 0
-      puts "Please enter a player name"
-    end
-    n = n.split.map(&:capitalize).join(' ')
-    human.name = n
+    choose_color_start_position
   end
 
   def choose_color
-    # Player one is white
-    @player1.color = true
+    @player1.color = true # Player one is white for testing
+  end
+
+  def choose_color_start_position
+    puts "Choose position of white. (t/b')"
+    white_position = gets.strip
+
+    Board.color_peaces(white_position)
+  end
+
+  def color_peaces
+    
   end
 end
 

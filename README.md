@@ -39,6 +39,8 @@ For now the runs on the command line, however the goal is to implement the game 
 - define chess piece
 - define different piece types
 - let player move a piece
+- change player per move
+- declare winner if game is finished
 
 ### Done
 

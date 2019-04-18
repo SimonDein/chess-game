@@ -18,7 +18,7 @@ class Board
     ROWS.times {|_| squares << Array.new(COLUMNS)}
   end
 
-  def display_board
+  def display
     puts "  +---+---+---+---+---+---+---+---+"
     puts "8 | r | n | b | q | e | b | n | r |"
     puts "  +---+---+---+---+---+---+---+---+"
@@ -39,8 +39,8 @@ class Board
     puts "    a   b   c   d   e   f   g   h"
   end
 
-  def display(player1, player2)
-    display_board(player1.pieces, player2.pieces)
+  def color_peaces
+    
   end
 
   private
@@ -54,7 +54,6 @@ class Board
     initialize_bishops
     initialize_queens
     initialize_kings
-    binding.pry
   end
   
   def place_pieces(squares_for_placement, piece_type)
